@@ -7,9 +7,9 @@ The API offers several url calls to return processed data from the database. See
 
 ## Bearer Tokens
 
-All API calls must carry a bearer token or cookie from the server. To get a token, you must submit a POST request with `application/x-www-form-urlencoded` data form to the url `http://portal.prattle.co/auth/local/`. The POST request should include two parameters: `email` and `password`, where `email` is the account email for the portal and `password` is the account password for the portal.
+All API calls must carry a bearer token or cookie from the server. To get a token, you must submit a POST request with `application/x-www-form-urlencoded` data form to the url `https://portal.prattle.co/auth/local/`. The POST request should include two parameters: `email` and `password`, where `email` is the account email for the portal and `password` is the account password for the portal.
 
-An example call from the command line would be `curl -X POST -d "email=YOUR@EMAIL.COM&password=YOURPASSWORD" http://portal.prattle.co/auth/local`. This will return the bearer token in the form of JSON. Use the `"token"` key to yield the token from the JSON.
+An example call from the command line would be `curl -X POST -d "email=YOUR@EMAIL.COM&password=YOURPASSWORD" https://portal.prattle.co/auth/local`. This will return the bearer token in the form of JSON. Use the `"token"` key to yield the token from the JSON.
 
 This process is streamlined for all Prattle R and Python wrappers.
 
@@ -17,7 +17,7 @@ This process is streamlined for all Prattle R and Python wrappers.
 
 Action | url | Notes
 -----|------|-------
-Base url | `http://portal.prattle.co/api` |
+Base url | `https://portal.prattle.co/api` |
 
 ## Bank API
 
@@ -47,7 +47,7 @@ def getBankData(bank):
     # reqests lib documentation: http://docs.python-requests.org/en/latest/user/quickstart/
     # get json token
     auth_info = {'email': '<your email>', 'password': '<your account password>'}
-    r = requests.post("http://portal.prattle.co/auth/local/", params=auth_info)
+    r = requests.post("https://portal.prattle.co/auth/local/", params=auth_info)
 
     # convert to json
     auth_token = json.loads(r.text)
@@ -56,7 +56,7 @@ def getBankData(bank):
     auth_token = auth_token['token']
 
     # get bank info from api using bearer token
-    url = 'http://portal.prattle.co/api/documents/bank/{0}'.format(bank)
+    url = 'https://portal.prattle.co/api/documents/bank/{0}'.format(bank)
     bearer_token = 'Bearer ' + auth_token
     headers = {'Authorization': bearer_token}
     print(headers)
