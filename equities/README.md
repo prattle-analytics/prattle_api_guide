@@ -6,6 +6,10 @@ harvesting system to keep new data from Prattle organized and up to date. Any da
 an archive based of our historical record files, and then utilizing our api to regularly query for new releases. This guide will also give
 documentation on our API.
 
+A general note: our systems are geared towards displaying _active_ companies. Companies that are no longer public and actively traded we 
+generally referred to as a "dead ticker". This is most evident in the portal. Currently dead tickers are not available via API and are only available
+in the archival flat files. These companies will be available to query in future deployments of the API that are, at the moment, in development (as of 3/23/18).
+
 # Archive
 
 Prattle maintains a series of flat files for our various data products. If you need access, please reach out to your Prattle representative.
@@ -37,8 +41,7 @@ password = 'your password'
 hdr = {'Accept': 'application/json'}
 
 r = requests.post(url,
-	data={'email': email, 'password': password
-	},
+      data={'email': email, 'password': password},
 	headers=hdr
 )
 auth = r.json()
@@ -50,9 +53,9 @@ You would reuse the `auth` object and add it to the previously defined header.
 
 ## Base URL
 
-Action | url | Notes
------|------|-------
-Base url | `https://equities.prattle.co/api/events` | Earnings calls are available under `events`. With no further arguments, this will return the last 12 months of events from _active_ companies.
+Action | url 
+-----|------
+Base url | `https://equities.prattle.co/api/` 
 
 ## Event Sample JSON
 Here is a sample of the api's JSON response for an earnings call:
@@ -72,5 +75,24 @@ Here is a sample of the api's JSON response for an earnings call:
 ## Events API documentation
 Action | url | Notes
 -----|------|-------
-Get all events from an organization | `/events/?symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
+Get all events from all organizations. | `/events/` | Events, passed without parameters, returns the previous 12 months of events from _active_ companies.	
+Get all events from an organization. | `/events/?symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
+Get all events from an organization after (or before) certain date. | `/events/?symbol={symbol}&after={date}	` | `{symbol}` is organization's stock exchange code, in all caps. `{date}` is the start date of your desired time period. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
+Get all events from an organization between certain dates. | `/events/?symbol={symbol}&between={lowdate}|{highdate}` | `{symbol}` is organization's stock exchange code, in all caps. `{lowDate}` is the beginning of your desired time period. `{highDate}` is the end of your desired time period. Seperated by a "|" pipe. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
+
+A full examples of the url to pass would be `full example: https://equities.prattle.co/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional).
+
+# Sample request in Python
+To pass the url from the above `AAPL` example, you can add the following code to the first python example.
+```python
+import pprint
+
+query_url = base_url + 'events/?symbol=AAPL&between="2016"|"2017"'
+
+r = requests.get(query_url, headers=hdr)
+
+# loop over the objects from the query for printing
+for ob in json.loads(r.text):
+    pprint.pprint(ob)
+```
 
