@@ -85,6 +85,7 @@ A full examples of the url to pass would be `full example: https://equities.prat
 # Sample request in Python
 To pass the url from the above `AAPL` example, you can add the following code to the first python example.
 ```python
+# This is a pretty print package, just to make the output appear nicer. You can replace the pprint with a regular print.
 import pprint
 
 query_url = base_url + 'events/?symbol=AAPL&between="2016"|"2017"'
