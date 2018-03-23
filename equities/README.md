@@ -37,21 +37,22 @@ password = 'your password'
 hdr = {'Accept': 'application/json'}
 
 r = requests.post(url,
-			data={
-				'email': email,
-				'password': password
-			},
-			headers=hdr
-		)
+	data={'email': email, 'password': password
+	},
+	headers=hdr
+)
 auth = r.json()
+
+# for use in further queries add the token to the header
+hdr['Authorization'] = 'Bearer ' + auth['token']
 ```
-You would reuse the `auth` object and add it to the previously defined header, i.e. `hdr['Authorization'] = 'Bearer ' + auth['token']`.
+You would reuse the `auth` object and add it to the previously defined header.
 
 ## Base URL
 
 Action | url | Notes
 -----|------|-------
-Base url | `https://equities.prattle.co/api/events` | Earnings calls are available under `events`.
+Base url | `https://equities.prattle.co/api/events` | Earnings calls are available under `events`. With no further arguments, this will return the last 12 months of events from _active_ companies.
 
 ## Event Sample JSON
 Here is a sample of the api's JSON response for an earnings call:
@@ -67,3 +68,9 @@ Here is a sample of the api's JSON response for an earnings call:
       score_car: -4.53
 }
 ```
+
+## Events API documentation
+Action | url | Notes
+-----|------|-------
+Get all events from an organization | `/events/?symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
+
