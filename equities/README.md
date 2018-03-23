@@ -71,14 +71,14 @@ A full examples of the url to pass would be `full example: https://equities.prat
 Here is a sample of the api's JSON response for an earnings call:
 ```json
 {
-      id: "132397",
-      symbol: "AAPL",
-      datetime_utc: "2016-10-25T21:00:00.000Z",
-      fiscal_quarter: 4,
-      fiscal_year: 2016,
-      oos: true,
-      score: -1.5601837336579774,
-      score_car: -4.53
+      "id": "132397",
+      "symbol": "AAPL",
+      "datetime_utc": "2016-10-25T21:00:00.000Z",
+      "fiscal_quarter": 4,
+      "fiscal_year": 2016,
+      "oos": true,
+      "score": -1.5601837336579774,
+      "score_car": -4.53
 }
 ```
 
