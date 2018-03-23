@@ -52,3 +52,18 @@ You would reuse the `auth` object and add it to the previously defined header, i
 Action | url | Notes
 -----|------|-------
 Base url | `https://equities.prattle.co/api/events` | Earnings calls are available under `events`.
+
+## Event Sample JSON
+Here is a sample of the api's JSON response for an earnings call:
+```json
+{
+      id: "132397",
+      symbol: "AAPL",
+      datetime_utc: "2016-10-25T21:00:00.000Z",
+      fiscal_quarter: 4,
+      fiscal_year: 2016,
+      oos: true,
+      score: -1.5601837336579774,
+      score_car: -4.53
+}
+```
