@@ -60,8 +60,8 @@ Base url | `https://equities.prattle.co/api/`
 ## Events API documentation
 Action | url | Notes
 -----|------|-------
-Get all events from all organizations. | `/events/` | Events, passed without parameters, returns the previous 12 months of events from _active_ companies.	
 Get all events from an organization. | `/events/?symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
+Get all events from all organizations. | `/events/?symbol=` | When the previous query is passed without querying for a specific ticker, the query returns the previous 12 months of events from _active_ companies.	
 Get all events from an organization after (or before) certain date. | `/events/?symbol={symbol}&after={date}	` | `{symbol}` is organization's stock exchange code, in all caps. `{date}` is the start date of your desired time period. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
 Get all events from an organization between certain dates. | `/events/?symbol={symbol}&between={lowdate}|{highdate}` | `{symbol}` is organization's stock exchange code, in all caps. `{lowDate}` is the beginning of your desired time period. `{highDate}` is the end of your desired time period. Seperated by a "|" pipe. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
 
@@ -177,3 +177,4 @@ Queries for full events, including component scores, must contain an id. For mul
    ]
 }
 ```
+
