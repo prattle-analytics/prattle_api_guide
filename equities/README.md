@@ -25,7 +25,10 @@ All API calls must carry a bearer token or cookie from the server. To get a toke
 
 An example call from the command line would be `curl -X POST -d "email=YOUR@EMAIL.COM&password=YOURPASSWORD" https://portal.prattle.co/auth/local`. This will return the bearer token in the form of JSON. Use the `"token"` key to yield the token from the JSON.
 
-In order to return results, you must add in the bearer token when you send `GET` requests with your query. In curl, this is accomplished by adding `-H "Authorization: Bearer token_you_received"`. A quick curl example would look like this: `curl "https://equities.prattle.co/api/events/?symbol=AAPL&between=2016|2017" -H "Authorization: Bearer token_you_received"`.
+In order to return results, you must add in the bearer token when you send `GET` requests with your query. In curl, this is accomplished by adding `-H "Authorization: Bearer token_you_received"`. A quick curl example would look like this: 
+```
+curl "https://equities.prattle.co/api/events/?symbol=AAPL&between=2016|2017" -H "Authorization: Bearer token_you_received"
+```
 
 ## Bearer Tokens in Python
 
