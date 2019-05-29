@@ -1,4 +1,4 @@
-Prattle Equities API & Analytics Dashboard v0.1: Developer Guide
+Prattle Equities API & Analytics Dashboard v0.1.1: Developer Guide
 =================================================
 
 This guide describes the utilization of the API for Prattle Earnings Call data, as well as give detail on how to organize a data 
@@ -63,14 +63,15 @@ Action | url
 Base url | `https://equities.prattle.co/api/` 
 
 ## Events API documentation
-Action | url | Notes
+Action | Query string | Notes
 -----|------|-------
-Get all events from an organization. | `/events/?symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
-Get all events from all organizations. | `/events/?symbol=` | When the previous query is passed without querying for a specific ticker, the query returns the previous 12 months of events from _active_ companies.	
-Get all events from an organization after (or before) certain date. | `/events/?symbol={symbol}&after={date}	` | `{symbol}` is organization's stock exchange code, in all caps. `{date}` is the start date of your desired time period. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
-Get all events from an organization between certain dates. | `/events/?symbol={symbol}&between={lowdate}\|{highdate}` | `{symbol}` is organization's stock exchange code, in all caps. `{lowDate}` is the beginning of your desired time period. `{highDate}` is the end of your desired time period. Seperated by a "|" pipe. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
+Get all earnings events from an organization. | `symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
+Get all events from all organizations. | `symbol=` | When the previous query is passed without querying for a specific ticker, the query returns the previous 12 months of events from _active_ companies.	
+Get all events from an organization after (or before) certain date. | `after={date}` | `{date}` is the start date of your desired time period. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`. `before={date}` can be used as well.
+Get all events from an organization between certain dates. | `between={lowdate}\|{highdate}` | `{lowDate}` is the beginning of your desired time period. `{highDate}` is the end of your desired time period. Seperated by a "|" pipe. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
+Get events of a particular type. | `type={type}` | `{type}` is a variable with acceptable values of `ecall`, `pr`, `speech`, `pr,speech`,  and `any`. When omitted, the default is `ecall`.
 
-A full examples of the url to pass would be `full example: https://equities.prattle.co/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional).
+Query strings are preceded by a `?` in the url, and are joined with a `&`. A full examples of the url to pass would be `full example: https://equities.prattle.co/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional) of all earnings calls from Apple in 2016. 
 
 ### Event Sample JSON
 Here is a sample of the api's JSON response for an earnings call:
