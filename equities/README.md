@@ -1,4 +1,4 @@
-Prattle Equities API & Analytics Dashboard v0.1.1: Developer Guide
+Prattle Equities API & Analytics Dashboard v0.1: Developer Guide
 =================================================
 
 This guide describes the utilization of the API for Prattle Earnings Call data, as well as give detail on how to organize a data 
@@ -63,6 +63,7 @@ Action | url
 Base url | `https://equities.prattle.co/api/` 
 
 ## Events API documentation
+
 Action | Query string | Notes
 -----|------|-------
 Get all earnings events from an organization. | `symbol={symbol}` | `{symbol}` is organization's stock exchange ticker symbol, in all caps. for example `symbol=AAPL`.
@@ -73,7 +74,8 @@ Get events of a particular type. | `type={type}` | `{type}` is a variable with a
 
 Query strings are preceded by a `?` in the url, and are joined with an `&`. A full examples of the url to pass would be `full example: https://equities.prattle.co/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional) of all earnings calls from Apple in 2016. 
 
-### Event Sample JSON
+### Earnings Call, Speech, and Press Release Sample JSON
+
 Here is a sample of the api's JSON response for an earnings call:
 ```json
 {
@@ -87,6 +89,34 @@ Here is a sample of the api's JSON response for an earnings call:
       "score_car": -4.53
 }
 ```
+
+Query results for press releases, and speeches are similarly structured.
+
+## Query 10-K and 10-Qs
+
+Under the 0.1 version of the API, results for regulatory filings can be queried by directly requesting a companies filing results utilizing an alternate identifier (not the primary ticker symbol). The filings are retreived with the query `kq?factset_entity_id={factset_entity_id}`. No other query methods work in coordination with this query, meaning that the entire set of filings is retreived each time the query is executed.
+
+The field `{factset_entity_id}` can be retreived by querying for the events of any given company. Programatically, a user would first, retreive results from a company, and cache the `{factset_entity_id}` from that set of results, and then use it to query for the regulatory filing information. The `{factset_entity_id}` to `{primary_symbol}` mapping changes infrequently, and can be cached for long term use.[^1 "This method will be updated in future iterations of the API, to streamline the query process."]
+
+
+### 10-K/10-Q Sample JSON
+
+A sample query for Apple would be structured thusly: `/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
+
+```json
+[{'date': '2019-05-01T20:44:57',
+  'factset_entity_id': '000C7F-E',
+  'score': <score omitted>,
+  'type': '10-Q',
+  'url': 'https://www.sec.gov/Archives/edgar/data/000320193000032019319000066/0000320193-19-000066-index.htm'},
+  ...
+  {'date': '1999-02-08T05:00:00',
+  'factset_entity_id': '000C7F-E',
+  'score': <score omitted>,
+  'type': '10-Q',
+  'url': 'https://www.sec.gov/Archives/edgar/data/000320193000032019399000002/0000320193-99-000002-index.htm'}]
+```
+
 
 
 ### Example request in Python
