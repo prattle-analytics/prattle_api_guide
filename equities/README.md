@@ -96,7 +96,7 @@ Query results for press releases, and speeches are similarly structured.
 
 Under the 0.1 version of the API, results for regulatory filings can be queried by directly requesting a companies filing results utilizing an alternate identifier (not the primary ticker symbol). The filings are retreived with the query `kq?factset_entity_id={factset_entity_id}`. No other query methods work in coordination with this query, meaning that the entire set of filings is retreived each time the query is executed.
 
-The field `{factset_entity_id}` can be retreived by querying for the events of any given company. Programatically, a user would first, retreive results from a company, and cache the `{factset_entity_id}` from that set of results, and then use it to query for the regulatory filing information. The `{factset_entity_id}` to `{primary_symbol}` mapping changes infrequently, and can be cached for long term use.[^1 "This method will be updated in future iterations of the API, to streamline the query process."]
+The field `{factset_entity_id}` can be retreived by querying for the events of any given company. Programatically, a user would first, retreive results from a company, and cache the `{factset_entity_id}` from that set of results, and then use it to query for the regulatory filing information. The `{factset_entity_id}` to `{primary_symbol}` mapping changes infrequently, and can be cached for long term use.<sup>[1](#myfootnote1)</sup>
 
 
 ### 10-K/10-Q Sample JSON
@@ -104,17 +104,17 @@ The field `{factset_entity_id}` can be retreived by querying for the events of a
 A sample query for Apple would be structured thusly: `/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
 
 ```json
-[{'date': '2019-05-01T20:44:57',
-  'factset_entity_id': '000C7F-E',
-  'score': <score omitted>,
-  'type': '10-Q',
-  'url': 'https://www.sec.gov/Archives/edgar/data/000320193000032019319000066/0000320193-19-000066-index.htm'},
+[{"date": "2019-05-01T20:44:57",
+  "factset_entity_id": "000C7F-E",
+  "score": 0.0,
+  "type": "10-Q",
+  "url": "https://www.sec.gov/Archives/edgar/data/000320193000032019319000066/0000320193-19-000066-index.htm"},
   ...
-  {'date': '1999-02-08T05:00:00',
-  'factset_entity_id': '000C7F-E',
-  'score': <score omitted>,
-  'type': '10-Q',
-  'url': 'https://www.sec.gov/Archives/edgar/data/000320193000032019399000002/0000320193-99-000002-index.htm'}]
+  {"date": "1999-02-08T05:00:00",
+  "factset_entity_id": "000C7F-E",
+  "score": 0.0,
+  "type": "10-Q",
+  "url": "https://www.sec.gov/Archives/edgar/data/000320193000032019399000002/0000320193-99-000002-index.htm"}]
 ```
 
 
@@ -214,3 +214,4 @@ Queries for full events, including component scores, must contain an id. For mul
 }
 ```
 
+<a name="myfootnote1">1</a>: This method will be updated in future iterations of the API, to streamline the query process.
