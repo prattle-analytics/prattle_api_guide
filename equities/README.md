@@ -60,7 +60,7 @@ You would reuse the `auth` object and add it to the previously defined header.
 
 Action | url 
 -----|------
-Base url | `https://equities.prattle.co/api/` 
+Base url | `https://equities.prattle.co/api/events` 
 
 ## Events API documentation
 
@@ -101,7 +101,7 @@ The field `{factset_entity_id}` can be retreived by querying for the events of a
 
 ### 10-K/10-Q Sample JSON
 
-A sample query for Apple would be structured thusly: `/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
+A sample query for Apple would be structured thusly: `https://equities.prattle.co/api/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
 
 ```json
 [{"date": "2019-05-01T20:44:57",
