@@ -38,7 +38,7 @@ If you plan on using the requests package, you need to request authorization, st
 import requests
 import json
 
-url = 'https://equities.prattle.co/auth/local/'
+url = 'https://equities.prattle.co/auth/local'
 email = 'your account id'
 password = 'your password'
 
