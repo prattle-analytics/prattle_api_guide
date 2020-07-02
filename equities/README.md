@@ -21,7 +21,7 @@ The API offers several url calls to return processed data from the database. See
 
 ## Bearer Tokens
 
-All API calls must carry a bearer token or cookie from the server. To get a token, you must submit a POST request with `application/x-www-form-urlencoded` data form to the url `https://equities.prattle.co/auth/local/`. The POST request should include two parameters: `email` and `password`, where `email` is the account email for the portal and `password` is the account password for the portal.
+All API calls must carry a bearer token or cookie from the server. To get a token, you must submit a POST request with `application/x-www-form-urlencoded` data form to the url `https://api-prattle.liquidnet.com/auth/local`. The POST request should include two parameters: `email` and `password`, where `email` is the account email for the portal and `password` is the account password for the portal.
 
 An example call from the command line would be `curl -X POST -d "email=YOUR@EMAIL.COM&password=YOURPASSWORD" https://portal.prattle.co/auth/local`. This will return the bearer token in the form of JSON. Use the `"token"` key to yield the token from the JSON.
 
@@ -38,7 +38,7 @@ If you plan on using the requests package, you need to request authorization, st
 import requests
 import json
 
-url = 'https://equities.prattle.co/auth/local'
+url = 'https://api-prattle.liquidnet.com/auth/local'
 email = 'your account id'
 password = 'your password'
 
