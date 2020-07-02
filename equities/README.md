@@ -27,7 +27,7 @@ An example call from the command line would be `curl -X POST -d "email=YOUR@EMAI
 
 In order to return results, you must add in the bearer token when you send `GET` requests with your query. In curl, this is accomplished by adding `-H "Authorization: Bearer token_you_received"`. A quick curl example would look like this:
 ```
-curl "https://equities.prattle.co/api/events/?symbol=AAPL&between=2016|2017" -H "Authorization: Bearer token_you_received"
+curl "https://api-prattle.liquidnet.com/api/events/?symbol=AAPL&between=2016|2017" -H "Authorization: Bearer token_you_received"
 ```
 
 ## Bearer Tokens in Python
@@ -60,7 +60,7 @@ You would reuse the `auth` object and add it to the previously defined header.
 
 Action | url
 -----|------
-Base url | `https://equities.prattle.co/api/events`
+Base url | `https://api-prattle.liquidnet.com/api/events`
 
 ## Events API documentation
 
@@ -72,7 +72,7 @@ Get all events from an organization after (or before) certain date. | `after={da
 Get all events from an organization between certain dates. | `between={lowdate}\|{highdate}` | `{lowDate}` is the beginning of your desired time period. `{highDate}` is the end of your desired time period. Separated by a "|" pipe. Acceptable date formats: `YYYY-MM-DD`, `YYYY-MM`, and `YYYY`.
 Get events of a particular type. | `type={type}` | `{type}` is a variable with acceptable values of `ecall`, `pr`, `speech`, `pr,speech`,  and `any`. When omitted, the default is `ecall`.
 
-Query strings are preceded by a `?` in the url, and are joined with an `&`. A full examples of the url to pass would be `full example: https://equities.prattle.co/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional) of all earnings calls from Apple in 2016.
+Query strings are preceded by a `?` in the url, and are joined with an `&`. A full examples of the url to pass would be `full example: https://api-prattle.liquidnet.com/api/events/?symbol=AAPL&between="2016"|"2017"` for a time slice (quote marks around the date are optional) of all earnings calls from Apple in 2016.
 
 ### Earnings Call, Speech, and Press Release Sample JSON
 
@@ -101,7 +101,7 @@ The field `{factset_entity_id}` can be retrieved by querying for the events of a
 
 ### 10-K/10-Q Sample JSON
 
-A sample query for Apple would be structured thusly: `https://equities.prattle.co/api/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
+A sample query for Apple would be structured thusly: `https://api-prattle.liquidnet.com/api/events/kq?factset_entity_id=000C7F-E`. The result is a JSON array, with each element of the array being a JSON object with five key-value pairs. For example, from our Apple query:
 
 ```json
 [{"date": "2019-05-01T20:44:57",
@@ -126,7 +126,7 @@ To pass the url from the above `AAPL` example, you can add the following code to
 # You can replace the pprint with a regular print.
 import pprint
 
-base_url = 'https://equities.prattle.co/api/events'
+base_url = 'https://api-prattle.liquidnet.com/api/events'
 query_url = base_url + '/?symbol=AAPL&between="2016"|"2017"'
 
 r = requests.get(query_url, headers=hdr)
@@ -143,7 +143,7 @@ This also provides a variety of addtional data points about the call.
 
 Action | url | Notes
 -----|------|-------
-Queries for full events, including component scores, must contain an id. For multiple results, programmatically loop over a returned list of events from the base /events/ endpoint which can return a (more concise) list. | `/events/full?id={id}` | `{id}` is the event's id, for example `https://equities.prattle.co/api/events/full?id=260496`
+Queries for full events, including component scores, must contain an id. For multiple results, programmatically loop over a returned list of events from the base /events/ endpoint which can return a (more concise) list. | `/events/full?id={id}` | `{id}` is the event's id, for example `https://api-prattle.liquidnet.com/api/events/full?id=260496`
 
 ### Sample JSON from a call.
 
