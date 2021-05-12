@@ -55,8 +55,8 @@ def getBankData(bank):
     # get token by key
     auth_token = auth_token['token']
 
-    # get bank info from api using bearer token
-    url = 'https://portal.prattle.co/api/documents/bank/{0}'.format(bank)
+    # get all documents from 2021-04-01 to 2021-04-30 from api using bearer token
+    url = 'https://portal.prattle.co/api/documents/bank/{0}/2021-04-01/2021-04-30'.format(bank)
     bearer_token = 'Bearer ' + auth_token
     headers = {'Authorization': bearer_token}
     print(headers)
